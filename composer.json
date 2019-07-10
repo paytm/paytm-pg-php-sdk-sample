@@ -1,0 +1,21 @@
+{
+  "name": "paytm/paytm-pgp-php-test",
+  "description": "Paytm PHP Sample Project",
+  "keywords": ["Test","Client","SDK","PHP"],
+  "authors": [
+    {
+      "name": "Sakshi Jain",
+      "role": "Developer"
+    }
+  ],
+  "homepage": "https://developer.paytm.com/docs",
+  "require": {
+    "php": ">=5.6.0",
+    "paytm/paytm-pg": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "paytmpg\\": "vendor/paytm/paytm-php"
+    }
+  }
+}
