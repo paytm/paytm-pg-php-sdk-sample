@@ -334,10 +334,6 @@
                 $refundStatusDetailBuilder = new RefundStatusDetailBuilder($orderId, $refId);
                 $refundStatusDetail = $refundStatusDetailBuilder->setReadTimeout($readTimeout)->build();
 
-                // Following 2 lines are only for testing purpose
-                MerchantProperties::setMid("eoCZuE96105495492097");
-                MerchantProperties::setMerchantKey("kP7Po7NEmcmF7s3i");
-
                 /**
                  * Making call to SDK method which will return the
                  * Paytm\merchant\models\SDKResponse(Paytm\pg\request\NativeRefundStatusRequest) that holds Paytm\pg\process\Refund Status of any
@@ -368,11 +364,10 @@
                 $mid = "xxxxxxxxxxxxxxxxxxxx";
                 $key = "xxxxxxxxxxxxxxxx";
 
-                $clientId = "C11";
                 $website = "WEBSTAGING";
 
                 /** Initialize mandatory Parameters */
-                MerchantProperties::initialize($env, $mid, $key, $clientId, $website);
+                MerchantProperties::initialize($env, $mid, $key, $website);
 
                 /** Setting timeout for connection i.e. Connection Timeout */
                 MerchantProperties::setConnectionTimeout(5000);
