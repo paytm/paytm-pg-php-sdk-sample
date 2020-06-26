@@ -232,8 +232,8 @@
         public static function getPaymentStatus()
         {
             try {
-                /** Unique order for each order request */
-                $orderId = "xxxxxxxx";
+                /**Order id for which you need to know payment status */
+                $orderId = "YOUR_ORDER_ID";
                 $readTimeout = 80000;
 
                 /* PaymentStatusDetail object will have all the information required to make getPaymentStatus call */
@@ -267,14 +267,17 @@
         public static function initiateRefund()
         {
             try {
-                /** Unique order for each order request */
-                $orderId = "xxxxxxxx";
+                /** Order id for which refund request needs to be raised */
+                $orderId = "YOUR_ORDER_ID";
 
-                /** REF ID returned in Paytm\pg\process\Refund call */
-                $refId = "xxxxxxxx";
+                /** Unique refund id */
+                $refId = "UNIQUE_REFUND_ID";
 
-                /** Transaction ID returned in Paytm\pg\process\Refund Api */
-                $txnId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+                /** Transaction ID returned in Paytm\pg\process\PaymentStatus Api */
+                $txnId = "PAYTM_TRANSACTION_ID";
+                
+                /** Transaction Type for refund */
+                $txnType="REFUND";
 
                 /** Paytm\pg\process\Refund Amount to be refunded (should not be greater than the Amount paid in the Transaction) */
                 $refundAmount = "1";
@@ -287,7 +290,7 @@
                 $extraParamsMap = SampleData::getExtraParamsMap();
 
                 /** Paytm\pg\process\Refund object will have all the information required to make refund call */
-                $refund = new RefundDetailBuilder($orderId, $refId, $txnId, $refundAmount);
+                $refund = new RefundDetailBuilder($orderId, $refId, $txnId, $txnType, $refundAmount);
                 $refundDetail = $refund->setReadTimeout($readTimeout)
                     ->setSubwalletAmount($subWalletAmount)
                     ->setExtraParamsMap($extraParamsMap)
@@ -320,10 +323,10 @@
         public static function getRefundStatus()
         {
             try {
-                /** Unique order for each order request */
-                $orderId = "xxxx";
-                /** Unique ref id for each refund request */
-                $refId = "xxxxxxxx";
+                /** Order id for which refund status needs to be checked */
+                $orderId = "YOUR_ORDER_ID";
+                /** Refund id of the refund request for which refund status needs to be checked */
+                $refId = "YOUR_REFUND_ID";
 
                 $readTimeout = 8000;
 
@@ -360,14 +363,16 @@
         {
             try {
                 $env = LibraryConstants::STAGING_ENVIRONMENT;
-                // Following mid and key is for create txn API
-                $mid = "xxxxxxxxxxxxxxxxxxxx";
-                $key = "xxxxxxxxxxxxxxxx";
-
-                $website = "WEBSTAGING";
+                /* Find your Merchant ID and Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys */
+                $mid = "YOUR_MID_HERE";
+                $key = "YOUR_KEY_HERE";
+                /* Website: For Staging - WEBSTAGING, For Production - DEFAULT */
+                $website = "YOUR_WEBSITE_NAME";
+                /* Client Id e.g C11 */
+                $client_id = "YOUR_CLIENT_ID_HERE";
 
                 /** Initialize mandatory Parameters */
-                MerchantProperties::initialize($env, $mid, $key, $website);
+                MerchantProperties::initialize($env, $mid, $key, $client_id, $website);
 
                 /** Setting timeout for connection i.e. Connection Timeout */
                 MerchantProperties::setConnectionTimeout(5000);
@@ -383,8 +388,8 @@
 
     DemoApp::setInitialParameters();
 
-    // Example using only mandatory fields
-    DemoApp::createTxnTokenwithRequiredParams();
+     // Example using only mandatory fields
+     DemoApp::createTxnTokenwithRequiredParams();
 
     // Example using mandatory and enabling and disabling payment modes fields
     DemoApp::createTxnTokenwithPaytmSSotokenAndPaymentMode();
@@ -398,5 +403,5 @@
     // Example of refund
     DemoApp::initiateRefund();
 
-    // Example of get refund status
-    DemoApp::getRefundStatus();
+     // Example of get refund status
+     DemoApp::getRefundStatus();

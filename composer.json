@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "paytmpg\\": "vendor/paytm/paytm-php"
+      "paytmpg\\": "vendor/paytm/paytm-pg"
     }
   }
 }
