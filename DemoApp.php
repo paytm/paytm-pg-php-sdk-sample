@@ -371,6 +371,9 @@
                 /* Client Id e.g C11 */
                 $client_id = "YOUR_CLIENT_ID_HERE";
 
+                $callbackUrl = "MERCHANT_CALLBACK_URL";
+                MerchantProperties::setCallbackUrl($callbackUrl);
+
                 /** Initialize mandatory Parameters */
                 MerchantProperties::initialize($env, $mid, $key, $client_id, $website);
 
